@@ -1,68 +1,68 @@
 const userSeeder = {
   signUp: {
-    fullName: 'Bilal',
-    username: 'bilal7',
+    fullName: 'Killian Chukwu',
+    username: 'Chukwu123',
     password: '123456',
-    email: 'bilal7@gmail.com',
+    email: 'Chukwu123@gmail.com',
     isAdmin: 1,
     passwordConfirm: '123456'
   },
 
   signUp2: {
-    fullName: 'Muhammad Bilal Sadiq',
-    username: 'usama222',
+    fullName: 'Fortune Caius',
+    username: 'Caius123',
     password: '123456',
-    email: 'usama222@gmail.com',
+    email: 'Caius123@gmail.com',
     passwordConfirm: 'helloworld'
   },
 
   login: {
-    username: 'Dealwap',
-    password: 'helloworld'
+    username: 'Maverick',
+    password: 'Sasho'
   },
 
   invalidLoginDetails: {
-    username: 'Dealwap',
+    username: 'Gotthold',
     password: 'hello'
   },
 
   missingPassword: {
-    username: 'Dealwap',
+    username: 'Gotthold',
   },
 
   existingUsername: {
-    fullName: 'Muhammad Bilal Sadiq',
-    username: 'bilal',
-    password: 'helloworld',
-    email: 'bilal@yahoo.com',
-    passwordConfirm: 'helloworld'
+    fullName: 'Killian Chukwu',
+    username: 'Chukwu123',
+    password: '123456',
+    email: 'Chukwu123@gmail.com',
+    passwordConfirm: '123456'
   },
 
   existingEmail: {
-    fullName: 'Muhammad Bilal Sadiq',
-    username: 'mubasher',
-    password: 'helloworld',
-    email: 'mubasher@gmail.com',
-    passwordConfirm: 'helloworld'
+    fullName: 'Killian Chukwu',
+    username: 'Chukwu123',
+    password: '123456',
+    email: 'Chukwu123@gmail.com',
+    passwordConfirm: '123456'
   },
   noFullName: {
-    username: 'mubasher',
-    password: 'helloworld',
-    email: 'mubasher@gmail.com',
-    passwordConfirm: 'helloworld'
+    username: 'Chukwu123',
+    password: '123456',
+    email: 'Chukwu123@gmail.com',
+    passwordConfirm: '123456'
   },
   noEmail: {
-    fullName: 'Muhammad Bilal Sadiq',
-    username: 'usama',
-    password: 'helloworld',
-    passwordConfirm: 'helloworld'
+    fullName: 'Killian Chukwu',
+    username: 'Chukwu123',
+    password: '123456',
+    passwordConfirm: '123456'
   },
   usernameMin5: {
-    fullName: 'Muhammad Bilal Sadiq',
-    username: 'usama',
-    password: 'helloworld',
-    email: 'usama@gmail.com',
-    passwordConfirm: 'helloworld'
+    fullName: 'Killian Chukwu',
+    username: 'Chukwu123',
+    password: '123456',
+    email: 'Chukwu123@gmail.com',
+    passwordConfirm: '123456'
   }
 };
 
