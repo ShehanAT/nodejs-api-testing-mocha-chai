@@ -8,12 +8,12 @@ import webpack from 'webpack';
 import winston from 'winston';
 import webpackMiddleware from 'webpack-dev-middleware';
 import validator from 'express-validator';
-import webpackConfigDev from './webpack.config.dev';
-import userRouter from './server/routes/userRouter';
-import bookRouter from './server/routes/bookRouter';
-import categoryRouter from './server/routes/categoryRouter';
-import searchRouter from './server/routes/searchRouter';
-import notificationRouter from './server/routes/notificationRouter';
+import webpackConfigDev from './webpack.config.dev.cjs';
+import userRouter from './routes/userRouter.js';
+import bookRouter from './routes/bookRouter.js';
+import categoryRouter from './routes/categoryRouter.js';
+import searchRouter from './routes/searchRouter.js';
+import notificationRouter from './routes/notificationRouter.js';
 
 const server = express();
 

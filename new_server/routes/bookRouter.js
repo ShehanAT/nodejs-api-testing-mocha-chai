@@ -1,8 +1,8 @@
 import express from 'express';
-import Authorization from '../middleware/Authorization';
-import BookController from '../controllers/BookController';
-import Validation from '../middleware/Validation';
-import sendMail from '../middleware/sendMail';
+import Authorization from '../middleware/Authorization.js';
+import BookController from '../controllers/BookController.js';
+import Validation from '../middleware/Validation.js';
+import sendMail from '../middleware/sendMail.js';
 
 const { checkBookId, sendBookInput, checkBookInput, validBook } = Validation;
 

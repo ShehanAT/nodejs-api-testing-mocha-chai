@@ -1,8 +1,8 @@
 import express from 'express';
 
-import Validation from '../middleware/Validation';
-import UserController from '../controllers/UserController';
-import Authorization from '../middleware/Authorization';
+import Validation from '../middleware/Validation.js';
+import UserController from '../controllers/UserController.js';
+import Authorization from '../middleware/Authorization.js';
 
 const { isLoggedIn } = Authorization;
 
