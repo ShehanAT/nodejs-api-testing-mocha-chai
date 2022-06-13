@@ -1,9 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-export default webpackConfigDev = {
+module.exports = {
   cache: true,
   entry: [
     // 'webpack-hot-middleware',
@@ -18,7 +18,8 @@ export default webpackConfigDev = {
     Materialize: 'Materialize'
   },
   plugins: [
-    new cleanWebpackPlugin(['client/dist']),
+    new CleanWebpackPlugin(),
+    // ['client/dist']
     new htmlWebpackPlugin({
       title: 'Hello-Books',
       template: 'client/index.html',
