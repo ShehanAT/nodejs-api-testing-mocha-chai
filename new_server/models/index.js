@@ -4,12 +4,15 @@ import Sequelize from 'sequelize';
 import dotenv from 'dotenv';
 import { dbConfig } from '../config/config.js';
 // let dbConfig = require('../config/config.js');
+import { URL } from 'url';
 
-const basename = path.basename(module.filename);
+const __filename = new URL('', import.meta.url).pathname;
+const __dirname = Array.from(new URL('.', import.meta.url).pathname).slice(0, -1).join("");
+const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = dbConfig[env];
 const db = {};
-dotenv.load();
+dotenv.config();
 let sequelize;
 
 if (env === 'development') {
