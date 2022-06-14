@@ -1,8 +1,9 @@
-const dotenv = require( 'dotenv' );
+// const dotenv = require( 'dotenv' );
+import dotenv from 'dotenv';
+dotenv.config();
 
-dotenv.load();
-
-export default dbConfig = {
+export const dbConfig = {
+// module.exports.dbConfig = {
   development: {
     username: 'Cleanthes123',
     password: '12345',
