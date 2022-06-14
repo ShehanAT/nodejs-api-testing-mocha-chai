@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import pkg from 'lodash';
 const { omit } = pkg;
 
-import database from '../models/index.js';
+import database from '../models/index.cjs';
 
 dotenv.load();
 

@@ -1,9 +1,16 @@
-const path = require('path');
-const webpack = require('webpack');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const cleanWebpackPlugin = require('clean-webpack-plugin');
+// const path = require('path');
+import path from 'path';
+// const webpack = require('webpack');
+import webpack from 'webpack';
+// const htmlWebpackPlugin = require('html-webpack-plugin');
+import htmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+// const cleanWebpackPlugin = require('clean-webpack-plugin');
 
-export default webpackConfigDev = {
+const __filename = new URL('', import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
+
+export const webpackConfigDev = {
   cache: true,
   entry: [
     // 'webpack-hot-middleware',
@@ -18,7 +25,9 @@ export default webpackConfigDev = {
     Materialize: 'Materialize'
   },
   plugins: [
-    new cleanWebpackPlugin(['client/dist']),
+    // new cleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
+    // ['client/dist']
     new htmlWebpackPlugin({
       title: 'Hello-Books',
       template: 'client/index.html',
@@ -37,7 +46,7 @@ export default webpackConfigDev = {
     ]),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    // new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
