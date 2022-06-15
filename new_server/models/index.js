@@ -1,18 +1,20 @@
-// import fs from 'fs';
-// import path from 'path';
-// import Sequelize from 'sequelize';
-// import dotenv from 'dotenv';
-// import { dbConfig } from '../config/config.js';
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const dotenv = require('dotenv');
-const { node } = require('webpack');
-const dbConfig = require('../config/config.js').dbConfig;
+import fs from 'fs';
+import path from 'path';
+import Sequelize from 'sequelize';
+import dotenv from 'dotenv';
+import { dbConfig } from '../config/config.js';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+// const fs = require('fs');
+// const path = require('path');
+// const Sequelize = require('sequelize');
+// const dotenv = require('dotenv');
+// const { node } = require('webpack');
+// const dbConfig = require('../config/config.js').dbConfig;
 
 
-// const __filename = new URL('', import.meta.url).pathname;
-// const __dirname = path.dirname(__filename);
+const __filename = new URL('', import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
@@ -34,8 +36,10 @@ fs
   .filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
   .forEach((file) => {
     // const model = sequelize
-    //   .import(path.join(__dirname, file));
-      const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+      // .import(path.join(__dirname, file));
+      // const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+      const model = import(path.join(__dirname, file));
+      // (sequelize, Sequelize.DataTypes);
       db[model.name] = model;
   });
 
@@ -50,4 +54,5 @@ Object
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+// module.exports = db;
+export default db;

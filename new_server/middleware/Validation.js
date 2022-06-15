@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import pkg from 'lodash';
 const { omit } = pkg;
 
-import database from '../models/index.cjs';
+import database from '../models/index.js';
 
 const { Book, User } = database;
 

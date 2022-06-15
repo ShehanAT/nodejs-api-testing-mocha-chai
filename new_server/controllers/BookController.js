@@ -1,4 +1,4 @@
-import database from '../models/index.cjs';
+import database from '../models/index.js';
 import UserController from './UserController.js';
 
 const { checkValidUser } = UserController;
