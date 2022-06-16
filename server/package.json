@@ -2,7 +2,8 @@
     "name": "react-api-testing-server",
     "version": "1.0.0",
     "description": "Node.js server app for testing APIs in React",
-    "main": "server.js",
+    "main": "server.js",  
+    "type": "module",
     "scripts": {
       "start": "nodemon --watch server --exec babel-node server.js",
       "webpack": "webpack-dev-server --progress --colors --hot --config ./webpack.config.dev.js",
