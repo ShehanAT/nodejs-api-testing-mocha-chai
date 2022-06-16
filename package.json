@@ -2,16 +2,22 @@
   "name": "react-form-unit-test-example",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
+    "@babel/register": "^7.17.7",
     "bootstrap": "^4.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^10.0.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "2.1.2"
+    "react-scripts": "^2.1.2",
+    "should": "^13.2.3",
+    "supertest": "^6.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "NODE_ENV=test && mocha --require @babel/register",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
