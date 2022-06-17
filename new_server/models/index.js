@@ -7,8 +7,9 @@ import { dbConfig } from '../config/config.js';
 import { URL } from 'url';
 
 const __filename = new URL('', import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
 // const __dirname = path.join(Array.from(new URL('.', import.meta.url).pathname).slice(0, -1).join(""));
-const __dirname = path.join(new URL('.', import.meta.url).pathname);
+// const __dirname = path.join(new URL('.', import.meta.url).pathname);
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = dbConfig[env];
