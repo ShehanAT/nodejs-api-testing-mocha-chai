@@ -6,7 +6,7 @@ const { omit } = pkg;
 
 import database from '../models/index.js';
 
-dotenv.load();
+dotenv.config();
 
 const secret = process.env.secretKey;
 

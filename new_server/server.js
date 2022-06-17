@@ -8,16 +8,19 @@ import webpack from 'webpack';
 import winston from 'winston';
 import webpackMiddleware from 'webpack-dev-middleware';
 import validator from 'express-validator';
-import webpackConfigDev from './webpack.config.dev.cjs';
+import { webpackConfigDev } from './webpack.config.dev.mjs';
 import userRouter from './routes/userRouter.js';
 import bookRouter from './routes/bookRouter.js';
 import categoryRouter from './routes/categoryRouter.js';
 import searchRouter from './routes/searchRouter.js';
 import notificationRouter from './routes/notificationRouter.js';
 
+const __filename = new URL('', import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
+
 const server = express();
 
-dotenv.load();
+dotenv.config();
 
 const swaggerJSDoc = swagger;
 // swagger definition

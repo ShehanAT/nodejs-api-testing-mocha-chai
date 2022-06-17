@@ -1,9 +1,10 @@
 // const dotenv = require( 'dotenv' );
+// dotenv.load();
+
 import dotenv from 'dotenv';
 dotenv.config();
 
 export const dbConfig = {
-// module.exports.dbConfig = {
   development: {
     username: 'Cleanthes123',
     password: '12345',

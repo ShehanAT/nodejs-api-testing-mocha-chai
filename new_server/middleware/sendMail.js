@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
-dotenv.load();
+dotenv.config();
 
 /**
  * @description - Mail sender

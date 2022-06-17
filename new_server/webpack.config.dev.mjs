@@ -1,9 +1,16 @@
-const path = require('path');
-const webpack = require('webpack');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const path = require('path');
+import path from 'path';
+// const webpack = require('webpack');
+import webpack from 'webpack';
+// const htmlWebpackPlugin = require('html-webpack-plugin');
+import htmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+// const cleanWebpackPlugin = require('clean-webpack-plugin');
 
-module.exports = {
+const __filename = new URL('', import.meta.url).pathname;
+const __dirname = path.dirname(__filename);
+
+export const webpackConfigDev = {
   cache: true,
   entry: [
     // 'webpack-hot-middleware',
@@ -18,6 +25,7 @@ module.exports = {
     Materialize: 'Materialize'
   },
   plugins: [
+    // new cleanWebpackPlugin(),
     new CleanWebpackPlugin(),
     // ['client/dist']
     new htmlWebpackPlugin({
