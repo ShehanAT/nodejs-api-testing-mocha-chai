@@ -80,8 +80,9 @@ server.get( '/api/docs/hellobooks.json', ( req, res ) => {
 } );
 
 server.get( '*', ( req, res ) => {
-  res.sendFile( path.join( __dirname, './client/index.html' ) );
-} );
+  console.log("dirname: " + __dirname);
+  res.sendFile( path.join( __dirname, './public/index.html' ) );
+});
 
 const port = process.env.PORT || 8000;
 

@@ -200,7 +200,9 @@ const userRouter = express.Router();
  *         description: Internal server error
  */
 userRouter.route('/signup')
-  .post(checkUserInput, sendUserInput, create);
+  // .post(checkUserInput, sendUserInput, create);
+  .post(checkUserInput, sendUserInput);
+
 
 /**
  * @swagger

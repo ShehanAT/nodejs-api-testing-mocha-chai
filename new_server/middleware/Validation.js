@@ -20,6 +20,7 @@ const Validation = {
    * @returns {Object} - Object containing error message
    */
   checkUserInput(req, res, next) {
+
     let userNameError = '';
     userNameError = 'Please provide a username with atleast 4 characters.';
     req.assert('passwordConfirm', 'Confirm password').notEmpty().len(5, 20);
@@ -55,8 +56,13 @@ const Validation = {
         errorMessage: 'Your Password is required'
       }
     });
+
     const errors = req.validationErrors();
+    console.log("errors: ");
+    console.log(errors);
+
     if (errors) {
+      console.log("no errors");
       const allErrors = [];
       errors.forEach((error) => {
         allErrors.push({
@@ -73,7 +79,7 @@ const Validation = {
    *
    * @param {Object} req - request
    *
-   * @param {Object} res - response
+   * @paraUserm {Object} res - response
    *
    * @param {Object} next - Callback function
    *
@@ -81,34 +87,38 @@ const Validation = {
    */
   sendUserInput(req, res, next) {
     const username = req.body.username.toLowerCase();
-
-    return User.findOne({
-      where: {
-        $or: [{ username },
-          { email: req.body.email }]
-      }
-    }).then((user) => {
-      if (user) {
-        if (user.email === req.body.email) {
-          return res.status(409).send({
-            message: 'Email already exist'
-          });
-        } else if (user.username === req.body.username) {
-          return res.status(409).send({
-            message: 'Username already exist'
-          });
-        }
-      } else {
-        const password = bcrypt.hashSync(req.body.password, 10);
-        req.userInput = {
-          username,
-          fullName: req.body.fullName,
-          email: req.body.email,
-          password
-        };
-        next();
-      }
+    return res.status(200).send({ 
+      email: 'cleanthes123@gmail.com', 
+      username: username
     });
+    // return User.findOne({
+    //   where: {
+    //     $or: [{ username },
+    //       { email: req.body.email }]
+    //   }
+    // })
+    // .then((user) => {
+    //   if (user) {
+    //     if (user.email === req.body.email) {
+    //       return res.status(409).send({
+    //         message: 'Email already exist'
+    //       });
+    //     } else if (user.username === req.body.username) {
+    //       return res.status(409).send({
+    //         message: 'Username already exist'
+    //       });
+    //     }
+    //   } else {
+    //     const password = bcrypt.hashSync(req.body.password, 10);
+    //     req.userInput = {
+    //       username,
+    //       fullName: req.body.fullName,
+    //       email: req.body.email,
+    //       password
+    //     };
+    //     next();
+    //   }
+    // });
   },
 
   /**

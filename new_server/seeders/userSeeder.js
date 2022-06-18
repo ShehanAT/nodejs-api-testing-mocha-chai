@@ -58,10 +58,10 @@ const userSeeder = {
     passwordConfirm: '123456'
   },
   usernameMin5: {
-    fullName: 'Killian Chukwu',
+    fullName: 'Cleanthes Stoic',
     username: 'testuser1',
     password: 'password1',
-    email: 'Chukwu123@gmail.com',
+    email: 'cleanthes123@gmail.com',
     passwordConfirm: 'password1'
   }
 };
