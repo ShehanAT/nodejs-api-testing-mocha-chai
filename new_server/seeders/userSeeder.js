@@ -59,10 +59,10 @@ const userSeeder = {
   },
   usernameMin5: {
     fullName: 'Killian Chukwu',
-    username: 'Chukwu123',
-    password: '123456',
+    username: 'testuser1',
+    password: 'password1',
     email: 'Chukwu123@gmail.com',
-    passwordConfirm: '123456'
+    passwordConfirm: 'password1'
   }
 };
 
