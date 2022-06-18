@@ -5,12 +5,6 @@ import dotenv from 'dotenv';
 import { dbConfig } from '../config/config.js';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-// const fs = require('fs');
-// const path = require('path');
-// const Sequelize = require('sequelize');
-// const dotenv = require('dotenv');
-// const { node } = require('webpack');
-// const dbConfig = require('../config/config.js').dbConfig;
 
 
 const __filename = new URL('', import.meta.url).pathname;
@@ -23,10 +17,19 @@ const db = {};
 dotenv.config();
 let sequelize;
 
+console.log("process.env.NODE_ENV: " + process.env.NODE_ENV);
+console.log("env: " + env);
+// console.log("config.database: " + config.database);
+// console.log("config.username: " + config.username);
+// console.log("config.password: " + config.password);
+// console.log("database url: " + process.env.DATABASE_URL);
+// console.log("config: " + config);
+
 if (env === 'development') {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
-} else if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL);
+} else if (env === 'test') {
+  sequelize = new Sequelize(process.env.DATABASE_TEST_URL);
+  // sequelize = new Sequelize(config.database, config.username, config.password, config);
 } else if (process.env.DATABASE_TEST_URL) {
   sequelize = new Sequelize(process.env.DATABASE_TEST_URL);
 }

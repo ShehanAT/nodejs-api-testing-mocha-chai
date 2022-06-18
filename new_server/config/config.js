@@ -14,6 +14,10 @@ export const dbConfig = {
   },
   test: {
     use_env_variable: 'DATABASE_TEST_URL',
+    username: 'Cleanthes123',
+    password: '12345',
+    database: 'bookSystem',
+    port: 5432,
     dialect: 'postgres'
   },
   production: {
