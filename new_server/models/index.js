@@ -5,12 +5,6 @@ import dotenv from 'dotenv';
 import { dbConfig } from '../config/config.js';
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-// const fs = require('fs');
-// const path = require('path');
-// const Sequelize = require('sequelize');
-// const dotenv = require('dotenv');
-// const { node } = require('webpack');
-// const dbConfig = require('../config/config.js').dbConfig;
 
 
 const __filename = new URL('', import.meta.url).pathname;
