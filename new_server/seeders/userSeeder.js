@@ -57,12 +57,19 @@ const userSeeder = {
     password: '123456',
     passwordConfirm: '123456'
   },
-  usernameMin5: {
+  validRegisterDetails: {
     fullName: 'Cleanthes Stoic',
     username: 'testuser1',
     password: 'password1',
     email: 'cleanthes123@gmail.com',
     passwordConfirm: 'password1'
+  },
+  invalidUsernameMin5: {
+    fullName: 'Cleanthes Stoic',
+    username: 'test',
+    password: 'password2',
+    email: 'cleanthes456@gmail.com',
+    passwordConfirm: 'password2'
   }
 };
 

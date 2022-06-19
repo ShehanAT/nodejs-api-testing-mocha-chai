@@ -12,7 +12,8 @@ import userSeeder from '../../new_server/seeders/userSeeder.js';
 dotenv.config();
 
 const {
-  usernameMin5,
+  validRegisterDetails,
+  invalidUsernameMin5,
   noFullName,
   signUp,
   invalidLoginDetails,
@@ -32,19 +33,40 @@ before((done) => {
 });
 
 describe('User Api: ', () => {
-  it('should check that username exceeds 4 characters', (done) => {
+  it('should return valid HTML and 200 Response Code', (done) => {
     server
-      .post('/api/v1/users/signup')
+      .get('/api/v1/users/signup')
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
-      .send(usernameMin5)
+      .send(validRegisterDetails)
       .expect(200)
       .end((err, res) => {
         if(err){
           console.log(err);
         }
         res.status.should.equal(200);
+        // res
+        //   .body[0]
+        //   .error
+        //   .should.equal('Please provide a username with atleast 4 characters.');
+        done();
+      });
+  });
+
+  it('should check that username exceeds 4 characters', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(invalidUsernameMin5)
+      .expect(400)
+      .end((err, res) => {
+        if(err){
+          console.log(err);
+        }
+        res.status.should.equal(400);
         // res
         //   .body[0]
         //   .error
