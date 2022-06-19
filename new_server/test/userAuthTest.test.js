@@ -46,15 +46,11 @@ describe('User Api: ', () => {
           console.log(err);
         }
         res.status.should.equal(200);
-        // res
-        //   .body[0]
-        //   .error
-        //   .should.equal('Please provide a username with atleast 4 characters.');
         done();
       });
   });
 
-  it('should check that username exceeds 4 characters', (done) => {
+  it('should throw error if username is less than 5 characters', (done) => {
     server
       .post('/api/v1/users/signup')
       .set('Connection', 'keep alive')
@@ -77,40 +73,41 @@ describe('User Api: ', () => {
 
   
 
-//   it('Should check for missing full name during registeration', (done) => {
-//     server
-//       .post('/api/v1/users/signup')
-//       .set('Connection', 'keep alive')
-//       .set('Content-Type', 'application/json')
-//       .type('form')
-//       .send(noFullName)
-//       .expect(400)
-//       .end((err, res) => {
-//         res.status.should.equal(400);
-//         res.body[0].error.should.equal('Your Fullname is required');
-//         done();
-//       });
-//   });
+  it('Should throw error if fullname is empty', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(noFullName)
+      .expect(400)
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body[0].error.should.equal('Your Fullname is required');
+        done();
+      });
+  });
 
-//   it('Should register a new user', (done) => {
-//     server
-//       .post('/api/v1/users/signup')
-//       .set('Connection', 'keep alive')
-//       .set('Content-Type', 'application/json')
-//       .type('form')
-//       .send(signUp)
-//       .expect(201)
-//       .end((err, res) => {
-//         res.status.should.equal(201);
-//         res.body.message.should.equal('Signed up successfully');
-//         const currentUser = jwt.decode(res.body.token);
-//         expect(currentUser.currentUser.email).toEqual('nosisky@gmail.com');
-//         expect(currentUser.currentUser.username).toEqual('dealwap');
-//         expect(currentUser.currentUser.fullName)
-//           .toEqual('Abdulrasaq Nasirudeen');
-//         done();
-//       });
-//   });
+  it('Should register a new user when provided request body is valid', (done) => {
+    server
+      .post('/api/v1/users/signup')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send(signUp)
+      .expect(201)
+      .end((err, res) => {
+        res.status.should.equal(201);
+
+        res.body.message.should.equal('Signed up successfully');
+        // const currentUser = jwt.decode(res.body.token);
+        const currentUser = res.body.token;
+        expect(currentUser.currentUser.email).toEqual('zeno123@gmail.com');
+        expect(currentUser.currentUser.username).toEqual('zeno123');
+        expect(currentUser.currentUser.fullName).toEqual('Zeno of Citium');
+        done();
+      });
+  });
 
 //   it('Should Check for existing username', (done) => {
 //     server

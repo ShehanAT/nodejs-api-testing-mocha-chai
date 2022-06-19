@@ -58,11 +58,11 @@ const Validation = {
     });
 
     const errors = req.validationErrors();
-    console.log("errors: ");
-    console.log(errors);
+    // console.log("errors: ");
+    // console.log(errors);
 
     if (errors) {
-      console.log("no errors");
+      // console.log("no errors");
       const allErrors = [];
       errors.forEach((error) => {
         allErrors.push({
@@ -87,9 +87,17 @@ const Validation = {
    */
   sendUserInput(req, res, next) {
     const username = req.body.username.toLowerCase();
-    return res.status(200).send({ 
-      email: 'cleanthes123@gmail.com', 
-      username: username
+    console.log("Req.body: ");
+    console.log(req.body);
+    return res.status(201).send({ 
+      message: 'Signed up successfully',
+      token: {
+        currentUser: {
+          email: req.body.email, 
+          username: username,
+          fullName: req.body.fullName
+        }
+      }
     });
     // return User.findOne({
     //   where: {

@@ -1,9 +1,9 @@
 const userSeeder = {
   signUp: {
-    fullName: 'Killian Chukwu',
-    username: 'Chukwu123',
+    fullName: 'Zeno of Citium',
+    username: 'zeno123',
     password: '123456',
-    email: 'Chukwu123@gmail.com',
+    email: 'zeno123@gmail.com',
     isAdmin: 1,
     passwordConfirm: '123456'
   },
@@ -46,9 +46,9 @@ const userSeeder = {
     passwordConfirm: '123456'
   },
   noFullName: {
-    username: 'Chukwu123',
+    username: 'cato123',
     password: '123456',
-    email: 'Chukwu123@gmail.com',
+    email: 'cato123@gmail.com',
     passwordConfirm: '123456'
   },
   noEmail: {
