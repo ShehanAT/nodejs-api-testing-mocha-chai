@@ -67,10 +67,10 @@ describe('User Api: ', () => {
           console.log(err);
         }
         res.status.should.equal(400);
-        // res
-        //   .body[0]
-        //   .error
-        //   .should.equal('Please provide a username with atleast 4 characters.');
+        res
+          .body[0]
+          .error
+          .should.equal('Please provide a username with at least 5 characters.');
         done();
       });
   });

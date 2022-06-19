@@ -22,7 +22,7 @@ const Validation = {
   checkUserInput(req, res, next) {
 
     let userNameError = '';
-    userNameError = 'Please provide a username with atleast 4 characters.';
+    userNameError = 'Please provide a username with at least 5 characters.';
     req.assert('passwordConfirm', 'Confirm password').notEmpty().len(5, 20);
     req.assert('passwordConfirm', 'Passwords must match')
       .equals(req.body.password);
@@ -31,7 +31,7 @@ const Validation = {
       username: {
         notEmpty: true,
         isLength: {
-          options: [{ min: 4 }],
+          options: [{ min: 5 }],
           errorMessage: userNameError
         },
         errorMessage: 'Your Username is required'
