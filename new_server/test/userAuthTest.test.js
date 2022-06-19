@@ -97,11 +97,13 @@ describe('User Api: ', () => {
       .send(signUp)
       .expect(201)
       .end((err, res) => {
+        if(err){
+          console.log(err);
+        }
         res.status.should.equal(201);
-
         res.body.message.should.equal('Signed up successfully');
-        // const currentUser = jwt.decode(res.body.token);
-        const currentUser = res.body.token;
+        const currentUser = jwt.decode(res.body.token);
+        // const currentUser = res.body.token;
         expect(currentUser.currentUser.email).toEqual('zeno123@gmail.com');
         expect(currentUser.currentUser.username).toEqual('zeno123');
         expect(currentUser.currentUser.fullName).toEqual('Zeno of Citium');
@@ -109,20 +111,20 @@ describe('User Api: ', () => {
       });
   });
 
-//   it('Should Check for existing username', (done) => {
-//     server
-//       .post('/api/v1/users/validate')
-//       .set('Connection', 'keep alive')
-//       .set('Content-Type', 'application/json')
-//       .type('form')
-//       .send({ username: 'dealwap' })
-//       .expect(409)
-//       .end((err, res) => {
-//         res.status.should.equal(409);
-//         res.body.message.should.equal('Username already exist');
-//         done();
-//       });
-//   });
+  // it('Should Check for existing username', (done) => {
+  //   server
+  //     .post('/api/v1/users/validate')
+  //     .set('Connection', 'keep alive')
+  //     .set('Content-Type', 'application/json')
+  //     .type('form')
+  //     .send({ username: 'dealwap' })
+  //     .expect(409)
+  //     .end((err, res) => {
+  //       res.status.should.equal(409);
+  //       res.body.message.should.equal('Username already exist');
+  //       done();
+  //     });
+  // });
 
 //   it(`Should return 'invalid email address supplied'
 //   when invalid email address is supplied`, (done) => {

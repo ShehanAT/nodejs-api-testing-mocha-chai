@@ -8,7 +8,7 @@ import database from '../models/index.js';
 
 dotenv.config();
 
-const secret = process.env.secretKey;
+const secret = process.env.SECRETKEY;
 
 const { User } = database;
 
@@ -26,32 +26,28 @@ const UserController = {
    * Route: POST: /users/signup
    */
   create( req, res ) {
-
-    return User.create( req.userInput )
-      .then( ( user ) => {
-        const currentUser = omit(
-          user.dataValues,
-          ['password', 'createdAt', 'updatedAt']
-        );
-        if ( currentUser.id ) {
-          currentUser.userId = currentUser.id;
-        }
-        const token = jwt.sign(
-          {
-            currentUser,
-            exp: Math.floor( Date.now() / 1000 ) + ( 60 * 60 * 24 )
-          },
-          secret
-        );
-        return res.status( 201 ).send( {
-          message: 'Signed up successfully',
-          token
-        } );
-      } )
-      .catch( error => {
-        console.log( error, '=======>' )
-
-      } );
+    console.log("passing create()");
+    const currentUser = {
+      email: req.body.email, 
+      username: req.body.username,
+      fullName: req.body.fullName
+    }
+  
+    const token = jwt.sign(
+      { 
+        currentUser,
+        exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24)
+      },
+      secret
+    );
+    if(token){
+      return res.status(201).send({ 
+        message: 'Signed up successfully',
+        token: token
+      });  
+    }else{
+      return res.status(500);
+    }
   },
 
   /**
