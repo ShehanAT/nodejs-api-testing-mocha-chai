@@ -239,6 +239,7 @@ userRouter.route('/edit/:userId')
   .put(isLoggedIn, validateUserEdit, editProfile);
 
 userRouter.route('/validate')
-  .post(checkUserExist, retrieveUserDetails);
+  // .post(checkUserExist, retrieveUserDetails);
+  .post(checkUserExist);
 
 export default userRouter;

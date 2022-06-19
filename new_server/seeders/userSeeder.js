@@ -31,10 +31,10 @@ const userSeeder = {
   },
 
   existingUsername: {
-    fullName: 'Killian Chukwu',
-    username: 'Chukwu123',
+    fullName: 'Gauis Musonius Rufus',
+    username: 'rufus',
     password: '123456',
-    email: 'Chukwu123@gmail.com',
+    email: 'rufus123@gmail.com',
     passwordConfirm: '123456'
   },
 

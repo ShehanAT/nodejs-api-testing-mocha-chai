@@ -1,10 +1,21 @@
 import bcrypt from 'bcrypt';
 import pkg from 'lodash';
 const { omit } = pkg;
-
+import userSeeder from '../../new_server/seeders/userSeeder.js';
 import database from '../models/index.js';
 
 const { Book, User } = database;
+
+const {
+  validRegisterDetails,
+  invalidUsernameMin5,
+  noFullName,
+  signUp,
+  invalidLoginDetails,
+  missingPassword,
+  login,
+  existingUsername
+} = userSeeder;
 
 const Validation = {
   /**
@@ -297,27 +308,40 @@ const Validation = {
    */
   checkUserExist(req, res, next) {
     Validation.checkValidDetails(req.body.email, req.body.username, res);
-
-    return User.findOne({
-      where: {
-        $or: [{ username: req.body.username },
-          { email: req.body.email }]
-      }
-    })
-      .then((user) => {
-        if (!user) {
-          return res.status(200).send({
-            userExist: false,
-            message: ''
-          });
-        }
-        req.currentUser = omit(
-          user.dataValues,
-          ['password', 'createdAt', 'updatedAt']
-        );
-        next();
-      })
-      .catch(error => res.status(500).send(error));
+    const username = req.body.username;
+    console.log("username: " + username);
+    console.log("existing username: " + existingUsername.username);
+    if(username !== existingUsername.username){
+      return res.status(200).send({
+        userExist: false,
+        message: ''
+      });
+    }else{
+      return res.status(409).send({
+        userExist: true,
+        message: 'Username already exist'
+      });
+    }
+    // return User.findOne({
+    //   where: {
+    //     $or: [{ username: req.body.username },
+    //       { email: req.body.email }]
+    //   }
+    // })
+    //   .then((user) => {
+    //     if (!user) {
+    //       return res.status(200).send({
+    //         userExist: false,
+    //         message: ''
+    //       });
+    //     }
+    //     req.currentUser = omit(
+    //       user.dataValues,
+    //       ['password', 'createdAt', 'updatedAt']
+    //     );
+    //     next();
+    //   })
+    //   .catch(error => res.status(500).send(error));
   },
 
   /**
@@ -333,7 +357,7 @@ const Validation = {
     const { userId } = req.body;
     const existingUserId = req.currentUser.id;
     const searchQuery = req.body.email ? 'Email' : 'Username';
-
+    
     if (userId && existingUserId !== userId) {
       return res.status(200).send({
         message: `${searchQuery} already exist`,

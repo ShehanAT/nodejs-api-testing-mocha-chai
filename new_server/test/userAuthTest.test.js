@@ -111,20 +111,20 @@ describe('User Api: ', () => {
       });
   });
 
-  // it('Should Check for existing username', (done) => {
-  //   server
-  //     .post('/api/v1/users/validate')
-  //     .set('Connection', 'keep alive')
-  //     .set('Content-Type', 'application/json')
-  //     .type('form')
-  //     .send({ username: 'dealwap' })
-  //     .expect(409)
-  //     .end((err, res) => {
-  //       res.status.should.equal(409);
-  //       res.body.message.should.equal('Username already exist');
-  //       done();
-  //     });
-  // });
+  it('Should Check for existing username', (done) => {
+    server
+      .post('/api/v1/users/validate')
+      .set('Connection', 'keep alive')
+      .set('Content-Type', 'application/json')
+      .type('form')
+      .send({ username: 'rufus' })
+      .expect(409)
+      .end((err, res) => {
+        res.status.should.equal(409);
+        res.body.message.should.equal('Username already exist');
+        done();
+      });
+  });
 
 //   it(`Should return 'invalid email address supplied'
 //   when invalid email address is supplied`, (done) => {

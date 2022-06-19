@@ -3,10 +3,11 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import pkg from 'lodash';
 const { omit } = pkg;
-
 import database from '../models/index.js';
 
 dotenv.config();
+
+
 
 const secret = process.env.SECRETKEY;
 
@@ -26,7 +27,6 @@ const UserController = {
    * Route: POST: /users/signup
    */
   create( req, res ) {
-    console.log("passing create()");
     const currentUser = {
       email: req.body.email, 
       username: req.body.username,
