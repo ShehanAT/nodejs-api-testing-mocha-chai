@@ -1,12 +1,44 @@
 const bookSeeder = {
+  listOfBooks: [
+    {
+      title: 'In Search of Lost Time',
+      isbn: '123-456-5858',
+      productionYear: 2015,
+      categoryId: 1,
+      author: 'Marcel Proust',
+      description: "Swann's Way, the first part of A la recherche de temps perdu, Marcel Proust's seven-part cycle, was published in 1913.",
+      cover: 'albert-think.jpg',
+      total: 20
+    },
+    {
+      title: 'Ulysses',
+      isbn: '123-456-5858',
+      productionYear: 2019,
+      categoryId: 1,
+      author: 'James Joyce',
+      description: 'Ulysses chronicles the passage of Leopold Bloom through Dublin during an ordinary day, June 16, 1904.',
+      cover: 'albert-think.jpg',
+      total: 20
+    },
+    {
+      title: 'Don Quixote',
+      isbn: '123-456-5858',
+      productionYear: 2010,
+      categoryId: 1,
+      author: 'Miguel de Cervantes',
+      description: 'Alonso Quixano, a retired country gentleman in his fifties, lives in an unnamed section of La Mancha with his niece and a housekeeper. ',
+      cover: 'albert-think.jpg',
+      total: 20
+    }
+  ],
   signUp: {
-    fullName: 'Muhammad Bilal Sadiq',
+    fullName: 'Zeno of Citium',
     username: 'testtest',
     password: 'helloworld',
     email: 'test@gmail.com'
   },
   adminSignup: {
-    fullName: 'Muhammad Bilal Sadiq',
+    fullName: 'Zeno of Citium',
     username: 'hellobooks',
     password: 'helloworld',
     email: 'hellot@gmail.com'

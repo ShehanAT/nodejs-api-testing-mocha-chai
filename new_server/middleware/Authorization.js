@@ -31,6 +31,8 @@ const Authorization = {
     } else {
       token = tokenAvailable;
     }
+    console.log("req.headers: ");
+    console.log(req.headers);
     if (token) {
       jwt.verify(token, key, (error, decoded) => {
         if (error) {
