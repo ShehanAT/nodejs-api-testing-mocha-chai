@@ -10,6 +10,8 @@ import models from '../../new_server/models/index.js';
 import userSeeder from '../../new_server/seeders/userSeeder.js';
 import bookSeeder from '../../new_server/seeders/bookSeeder.js';
 
+const key = process.env.SECRETKEY;
+
 const {
     listOfBooks
 } = bookSeeder;
@@ -17,7 +19,7 @@ const {
 const server = supertest.agent(app);
 const token = process.env.testToken;
 
-
+ 
 before((done) => {
     models.sequelize.sync({ force: true }).then(() => {
       done(null);
@@ -26,15 +28,16 @@ before((done) => {
     });
   });
 
-describe('Book Api: ', () => {
-    const xAccessToken = await jwt.sign({_id:this._id.toString()},'Express')
+describe('Book Api: ', async () => {
+    const randomId = Math.floor(Math.random() * 10);
+    const xAccessToken = await jwt.sign({ _id: randomId.toString() }, key);
     
     it('If user is logged in then request: GET /books should ', (done) => {
         server
           .get('/api/v1/books')
           .set('Connection', 'keep alive')
           .set('Content-Type', 'application/json')
-          .set('x-access-token', '')
+          .set('x-access-token', 'Bearer ' + xAccessToken)
 
           .type('form')
         //   .expect(200)
@@ -42,8 +45,10 @@ describe('Book Api: ', () => {
             if(err){
               console.log(err);
             }
-            console.log(res.body.message);
-            // res.status.should.equal(200);
+            // console.log(res.body.message);
+            res.status.should.equal(200);
+            console.log(res.body.message.length.should.equal(3));
+            // res.body.listOfBooks.length.should.equal(3);
             done();
           });
       });

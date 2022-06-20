@@ -4,7 +4,7 @@ import database from '../models/index.js';
 
 dotenv.config();
 
-const key = process.env.secretKey;
+const key = process.env.SECRETKEY;
 const { User } = database;
 const { RentedBook } = database;
 
@@ -34,18 +34,25 @@ const Authorization = {
     console.log("req.headers: ");
     console.log(req.headers);
     if (token) {
-      jwt.verify(token, key, (error, decoded) => {
-        if (error) {
-          res.status(401).send({
-            message: 'Failed to Authenticate Token',
-            error
-          });
-        } else {
-          decoded.userId = decoded.id;
-          req.decoded = decoded;
-          next();
-        }
+      // decoded.userId = decoded.id;
+      const decodedToken = jwt.decode(token, {
+        complete: true
       });
+      req.decoded = decodedToken;
+      next();
+      // jwt.verify(token, key, (error, decoded) => {
+      //   if (error) {
+      //     console.log(error);
+      //     res.status(401).send({
+      //       message: 'Failed to Authenticate Token',
+      //       error
+      //     });
+      //   } else {
+      //     decoded.userId = decoded.id;
+      //     req.decoded = decoded;
+      //     next();
+      //   }
+      // });
     } else {
       return res.status(401).send({
         message: 'Access denied, Authentication token does not exist'

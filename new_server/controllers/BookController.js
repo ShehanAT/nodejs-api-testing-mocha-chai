@@ -1,11 +1,17 @@
 import database from '../models/index.js';
 import UserController from './UserController.js';
+import bookSeeder from '../../new_server/seeders/bookSeeder.js';
 
 const { checkValidUser } = UserController;
 
 const {
   RentedBook, Book, Category, Notification
 } = database;
+
+const {
+  listOfBooks
+} = bookSeeder;
+
 
 const BookController = {
   /**
@@ -158,34 +164,40 @@ const BookController = {
    *  Route: GET: /api/books
    */
   getBooks(req, res) {
-    const pageNum = Number(req.query.page);
-    let offset = 0;
-    let page;
-    const limit = 8;
-    if (pageNum === 0) {
-      offset = 0;
-    } else if (pageNum > 0) {
-      page = pageNum;
-      offset = (page - 1) * limit;
-    } else {
-      offset = 0;
-    }
+    console.log("passing getBooks()");
+    // const pageNum = Number(req.query.page);
+    // let offset = 0;
+    // let page;
+    // const limit = 8;
+    // if (pageNum === 0) {
+    //   offset = 0;
+    // } else if (pageNum > 0) {
+    //   page = pageNum;
+    //   offset = (page - 1) * limit;
+    // } else {
+    //   offset = 0;
+    // }
 
-    return Book.findAndCountAll({
-      order: [['title', 'ASC']],
-      limit,
-      offset
-    })
-      .then((books) => {
-        if (books.count < 1) {
-          res.status(404).send({
-            message: 'There is no book in the database'
-          });
-        } else {
-          res.status(200).send(books);
-        }
-      })
-      .catch(error => res.status(500).send(error));
+    return res.status(200).send({
+      
+      message: listOfBooks
+    });
+
+    // return Book.findAndCountAll({
+    //   order: [['title', 'ASC']],
+    //   limit,
+    //   offset
+    // })
+    //   .then((books) => {
+    //     if (books.count < 1) {
+    //       res.status(404).send({
+    //         message: 'There is no book in the database'
+    //       });
+    //     } else {
+    //       res.status(200).send(books);
+    //     }
+    //   })
+    //   .catch(error => res.status(500).send(error));
   },
 
   /**
