@@ -32,7 +32,7 @@ describe('Book Api: ', async () => {
     const randomId = Math.floor(Math.random() * 10);
     const xAccessToken = await jwt.sign({ _id: randomId.toString() }, key);
     
-    it('If user is logged in then request: GET /books should ', (done) => {
+    it('If user is logged in then request: GET /books should return a list of 3 books', (done) => {
         server
           .get('/api/v1/books')
           .set('Connection', 'keep alive')
@@ -50,6 +50,27 @@ describe('Book Api: ', async () => {
             console.log(res.body.message.length.should.equal(3));
             // res.body.listOfBooks.length.should.equal(3);
             done();
+          });
+      });
+
+      it('If user is logged in then request: GET /users/:userId/books should return a list of books held by the user :userId', (done) => {
+        server
+          .get('/api/v1/users/:userId/books')
+          .set('Connection', 'keep alive')
+          .set('Content-Type', 'application/json')
+          .set('x-access-token', 'Bearer ' + xAccessToken)
+
+          .type('form')
+          // .expect(200)
+          .end((err, res) => {
+            // if(err){
+            //   console.log(err);
+            // }
+            // console.log(res.body.message);
+            // res.status.should.equal(200);
+            // console.log(res.body.message.length.should.equal(3));
+            // // res.body.listOfBooks.length.should.equal(3);
+            // done();
           });
       });
 
