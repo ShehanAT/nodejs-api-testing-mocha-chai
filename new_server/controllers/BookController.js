@@ -9,7 +9,8 @@ const {
 } = database;
 
 const {
-  listOfBooks
+  listOfBooks,
+  rentedBooks
 } = bookSeeder;
 
 
@@ -247,29 +248,38 @@ const BookController = {
    * Route: GET: //api/users/:UserId/books?returned=false
    */
   rentedBooks(req, res) {
-    const { userId } = req.decoded.currentUser;
+    const { userId } = req.params.userId;
     const userData = {
       userId,
       newId: req.params.userId
     };
 
     checkValidUser(res, userData);
-    return RentedBook.findAll({
-      where: {
-        returned: req.query.returned,
-        userId
+    let rentedBooksArr = [];
+    for(var i = 0 ; i < rentedBooks.length ; i++){
+      if(rentedBooks[i].userId === userId){
+        rentedBooksArr.push(rentedBooks[i]);
       }
+    }
+    res.status(200).send({
+      message: rentedBooksArr
     })
-      .then((books) => {
-        if (books.length < 1) {
-          res.status(200).send({
-            message: 'No rented unreturned books'
-          });
-        } else {
-          res.status(200).send(books);
-        }
-      })
-      .catch(error => res.status(500).send(error));
+    // return RentedBook.findAll({
+    //   where: {
+    //     returned: req.query.returned,
+    //     userId
+    //   }
+    // })
+    //   .then((books) => {
+    //     if (books.length < 1) {
+    //       res.status(200).send({
+    //         message: 'No rented unreturned books'
+    //       });
+    //     } else {
+    //       res.status(200).send(books);
+    //     }
+    //   })
+    //   .catch(error => res.status(500).send(error));
   },
 
   /**

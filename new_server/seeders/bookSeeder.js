@@ -1,6 +1,24 @@
 const bookSeeder = {
+  rentedBooks: [ 
+    {
+      bookId: 1,
+      userId: 3,
+      returned: false,
+    },
+    {
+      bookId: 2,
+      userId: 3,
+      returned: false,
+    },
+    {
+      bookId: 3,
+      userId: 3,
+      returned: false,
+    }
+  ],
   listOfBooks: [
     {
+      bookId: 1,
       title: 'In Search of Lost Time',
       isbn: '123-456-5858',
       productionYear: 2015,
@@ -11,6 +29,7 @@ const bookSeeder = {
       total: 20
     },
     {
+      bookId: 2,
       title: 'Ulysses',
       isbn: '123-456-5858',
       productionYear: 2019,
@@ -21,6 +40,7 @@ const bookSeeder = {
       total: 20
     },
     {
+      bookId: 3,
       title: 'Don Quixote',
       isbn: '123-456-5858',
       productionYear: 2010,

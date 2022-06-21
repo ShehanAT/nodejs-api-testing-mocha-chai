@@ -13,7 +13,8 @@ import bookSeeder from '../../new_server/seeders/bookSeeder.js';
 const key = process.env.SECRETKEY;
 
 const {
-    listOfBooks
+    listOfBooks,
+    rentedBooks,
 } = bookSeeder;
 
 const server = supertest.agent(app);
@@ -55,7 +56,7 @@ describe('Book Api: ', async () => {
 
       it('If user is logged in then request: GET /users/:userId/books should return a list of books held by the user :userId', (done) => {
         server
-          .get('/api/v1/users/:userId/books')
+          .get('/api/v1/users/3/books')
           .set('Connection', 'keep alive')
           .set('Content-Type', 'application/json')
           .set('x-access-token', 'Bearer ' + xAccessToken)
