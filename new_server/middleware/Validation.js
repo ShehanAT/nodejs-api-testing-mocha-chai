@@ -186,7 +186,7 @@ const Validation = {
     if(!Number.isInteger(req.body['0[productionYear]'])){
       bookErrors.push('Book Description must not be empty');
     }
-    
+
     if(bookErrors){
       return res.status(400).json({
             message: bookErrors
@@ -259,6 +259,8 @@ const Validation = {
    * @returns {Object} - Object containing book inout
    */
   sendBookInput(req, res, next) {
+    console.log("sendBookInput(): req");
+    console.log(req.body);
     Book.findOne({
       where: {
         isbn: req.body.isbn
