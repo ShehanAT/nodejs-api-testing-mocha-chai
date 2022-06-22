@@ -3,7 +3,10 @@ import pkg from 'lodash';
 const { omit } = pkg;
 import userSeeder from '../../new_server/seeders/userSeeder.js';
 import database from '../models/index.js';
-
+import bookSeeder from '../seeders/bookSeeder.js';
+const {
+  listOfBooks
+} = bookSeeder;
 
 const { Book, User } = database;
 
@@ -148,11 +151,25 @@ const Validation = {
  */
   checkBookId(req, res, next) {
     const querier = req.body.bookId || req.params.bookId;
-    if (!querier || /[\D]/.test(querier)) {
+    var foundBook = false;
+
+    listOfBooks.forEach((book) => {
+      if(book){
+        if(book.bookId == querier){
+          foundBook = true;
+        }
+      }
+    });
+    if(foundBook){
       return res.status(400).send({
-        message: 'Invalid book id supplied!!!'
-      });
+        message: 'Book id already exists! Please supply an unique book'
+      })
     }
+    // if (!querier || /[\D]/.test(querier)) {
+    //   return res.status(400).send({
+    //     message: 'Invalid book id supplied!!!'
+    //   });
+    // }
     next();
   },
 

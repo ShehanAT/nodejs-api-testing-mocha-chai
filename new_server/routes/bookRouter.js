@@ -239,7 +239,7 @@ bookRouter.route('/books')
 bookRouter.route('/users/:userId/books')
   .post(
     isLoggedIn,
-    checkUserPlan,
+    // checkUserPlan,
     checkBookId,
     hasRentedBefore,
     rentBook

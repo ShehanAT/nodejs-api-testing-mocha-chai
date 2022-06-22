@@ -100,9 +100,35 @@ describe('Book Api: ', async () => {
             expect(res.body.book.categoryId).to.not.be.null;
             expect(res.body.book.author).to.not.be.null;
             expect(res.body.book.total).to.not.be.null;
-            // console.log(res);
-            // res.status.should.equal(200);
-            // res.body.message.length.should.equal(3);
+
+            done();
+          });
+      });
+
+
+      it('should allow the user to borrow a book if the user is logged in via the request: POST /users/{userId}/books', (done) => {
+        server
+          .post('/api/v1/users/{userId}/books')
+          .set('Connection', 'keep alive')
+          .set('Content-Type', 'application/json')
+          .set('x-access-token', 'Bearer ' + xAccessToken)
+          .send([ addBook, adminUser ])
+          .type('form')
+          .expect(201)
+          .end((err, res) => {
+            if(err){
+              console.log(err);
+            }
+            var expect = chai.expect;
+            // expect(res.body.book.bookId).to.not.be.null;
+            // expect(res.body.book.name).to.not.be.null;
+            // expect(res.body.book.isbn).to.not.be.null;
+            // expect(res.body.book.description).to.not.be.null;
+            // expect(res.body.book.productionYear).to.not.be.null;
+            // expect(res.body.book.categoryId).to.not.be.null;
+            // expect(res.body.book.author).to.not.be.null;
+            // expect(res.body.book.total).to.not.be.null;
+
             done();
           });
       });
