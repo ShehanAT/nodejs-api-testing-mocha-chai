@@ -165,7 +165,6 @@ const BookController = {
    *  Route: GET: /api/books
    */
   getBooks(req, res) {
-    console.log("passing getBooks()");
     // const pageNum = Number(req.query.page);
     // let offset = 0;
     // let page;
@@ -248,16 +247,16 @@ const BookController = {
    * Route: GET: //api/users/:UserId/books?returned=false
    */
   rentedBooks(req, res) {
-    const { userId } = req.params.userId;
+    const userId = req.params.userId;
     const userData = {
-      userId,
+      userId: userId,
       newId: req.params.userId
     };
 
     checkValidUser(res, userData);
     let rentedBooksArr = [];
     for(var i = 0 ; i < rentedBooks.length ; i++){
-      if(rentedBooks[i].userId === userId){
+      if(rentedBooks[i].userId === +userId){
         rentedBooksArr.push(rentedBooks[i]);
       }
     }

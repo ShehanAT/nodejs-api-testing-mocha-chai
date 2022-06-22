@@ -62,16 +62,14 @@ describe('Book Api: ', async () => {
           .set('x-access-token', 'Bearer ' + xAccessToken)
 
           .type('form')
-          // .expect(200)
+          .expect(200)
           .end((err, res) => {
-            // if(err){
-            //   console.log(err);
-            // }
-            // console.log(res.body.message);
-            // res.status.should.equal(200);
-            // console.log(res.body.message.length.should.equal(3));
-            // // res.body.listOfBooks.length.should.equal(3);
-            // done();
+            if(err){
+              console.log(err);
+            }
+            res.status.should.equal(200);
+            res.body.message.length.should.equal(3);
+            done();
           });
       });
 
