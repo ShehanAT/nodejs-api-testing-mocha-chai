@@ -168,57 +168,82 @@ const Validation = {
    * @returns {Object} - Object containing error message
    */
   checkBookInput(req, res, next) {
-    const bookError = 'Please provide a book title with atleast 5 characters.';
-    req.checkBody({
-      title: {
-        notEmpty: true,
-        isLength: {
-          options: [{ min: 5 }],
-          errorMessage: bookError
-        },
-        errorMessage: 'Book title is required'
-      },
-      isbn: {
-        notEmpty: true,
-        errorMessage: 'ISBN is required'
-      },
-      productionYear: {
-        notEmpty: true,
-        errorMessage: 'Production Year is required'
-      },
-      cover: {
-        notEmpty: true,
-        errorMessage: 'Please upload a valid book cover'
-      },
-      author: {
-        notEmpty: true,
-        errorMessage: 'Please add book author'
-      },
-      description: {
-        notEmpty: true,
-        errorMessage: 'Please add book description'
-      },
-      total: {
-        notEmpty: true,
-        errorMessage: 'Please add total book'
-      },
-      categoryId: {
-        notEmpty: true,
-        errorMessage: 'Please add book category'
-      }
-    });
-    const errors = req.validationErrors();
-    if (errors) {
-      const allErrors = [];
-      errors.forEach((error) => {
-        const errorMessage = error.msg;
-        allErrors.push(errorMessage);
-      });
-      return res.status(400).json({
-        message: allErrors[0]
-      });
+    console.log("checkBookInput() req.body.bookId:");
+    console.log(req.body['0[bookId]'])
+    var bookErrors = [];
+    if(!Number.isInteger(req.body['0[bookId]'])){
+      bookErrors.push('Book id must not be empty and must be a number');
     }
-    next();
+    if(req.body['0[name]'] == ""){
+      bookErrors.push('Book name must not be empty');
+    }
+    if(req.body['0[isbn]'] == ""){
+      bookErrors.push('Book ISBN must not be empty');
+    }
+    if(req.body['0[description]'] == ""){
+      bookErrors.push('Book Description must not be empty');
+    }
+    if(!Number.isInteger(req.body['0[productionYear]'])){
+      bookErrors.push('Book Description must not be empty');
+    }
+    
+    if(bookErrors){
+      return res.status(400).json({
+            message: bookErrors
+      }); 
+    }else{
+      next();
+    }
+    // const bookError = 'Please provide a book title with atleast 5 characters.';
+    // req.checkBody({
+    //   title: {
+    //     notEmpty: true,
+    //     isLength: {
+    //       options: [{ min: 5 }],
+    //       errorMessage: bookError
+    //     },
+    //     errorMessage: 'Book title is required'
+    //   },
+    //   isbn: {
+    //     notEmpty: true,
+    //     errorMessage: 'ISBN is required'
+    //   },
+    //   productionYear: {
+    //     notEmpty: true,
+    //     errorMessage: 'Production Year is required'
+    //   },
+    //   cover: {
+    //     notEmpty: true,
+    //     errorMessage: 'Please upload a valid book cover'
+    //   },
+    //   author: {
+    //     notEmpty: true,
+    //     errorMessage: 'Please add book author'
+    //   },
+    //   description: {
+    //     notEmpty: true,
+    //     errorMessage: 'Please add book description'
+    //   },
+    //   total: {
+    //     notEmpty: true,
+    //     errorMessage: 'Please add total book'
+    //   },
+    //   categoryId: {
+    //     notEmpty: true,
+    //     errorMessage: 'Please add book category'
+    //   }
+    // });
+    // const errors = req.validationErrors();
+    // if (errors) {
+    //   const allErrors = [];
+    //   errors.forEach((error) => {
+    //     const errorMessage = error.msg;
+    //     allErrors.push(errorMessage);
+    //   });
+    //   return res.status(400).json({
+    //     message: allErrors[0]
+    //   });
+    // }
   },
 
 

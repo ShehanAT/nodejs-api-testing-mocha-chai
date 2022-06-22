@@ -10,12 +10,18 @@ import models from '../../new_server/models/index.js';
 import userSeeder from '../../new_server/seeders/userSeeder.js';
 import bookSeeder from '../../new_server/seeders/bookSeeder.js';
 
+
 const key = process.env.SECRETKEY;
 
 const {
     listOfBooks,
     rentedBooks,
+    addBook
 } = bookSeeder;
+
+const {
+  adminUser
+} = userSeeder;
 
 const server = supertest.agent(app);
 const token = process.env.testToken;
@@ -60,7 +66,6 @@ describe('Book Api: ', async () => {
           .set('Connection', 'keep alive')
           .set('Content-Type', 'application/json')
           .set('x-access-token', 'Bearer ' + xAccessToken)
-
           .type('form')
           .expect(200)
           .end((err, res) => {
@@ -73,4 +78,23 @@ describe('Book Api: ', async () => {
           });
       });
 
+      it('If user is logged in then request: POST /books should create a new book and return it', (done) => {
+        server
+          .post('/api/v1/books')
+          .set('Connection', 'keep alive')
+          .set('Content-Type', 'application/json')
+          .set('x-access-token', 'Bearer ' + xAccessToken)
+          .send([ addBook, adminUser ])
+          .type('form')
+          .expect(200)
+          .end((err, res) => {
+            if(err){
+              console.log(err);
+            }
+            // console.log(res);
+            // res.status.should.equal(200);
+            // res.body.message.length.should.equal(3);
+            done();
+          });
+      });
 });

@@ -1,10 +1,19 @@
 const userSeeder = {
+  adminUser: {
+    userId: 1, 
+    fullName: 'Zeno of Citium',
+    username: 'zeno123',
+    password: '123456',
+    email: 'zeno123@gmail.com',
+    isAdmin: true,
+    passwordConfirm: '123456'
+  },
   signUp: {
     fullName: 'Zeno of Citium',
     username: 'zeno123',
     password: '123456',
     email: 'zeno123@gmail.com',
-    isAdmin: 1,
+    isAdmin: true,
     passwordConfirm: '123456'
   },
 

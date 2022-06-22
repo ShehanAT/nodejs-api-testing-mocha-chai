@@ -1,4 +1,14 @@
 const bookSeeder = {
+  addBook: {
+    bookId: 4,
+    name: "Seeking Wisdom: From Darwin to Munger",
+    isbn: '123-999-5555',
+    description: "A book on how to improve your thinking",
+    productionYear: 2007,
+    categoryId: 1,
+    author: 'Marcel Proust',
+    total: 25
+  },
   rentedBooks: [ 
     {
       bookId: 1,

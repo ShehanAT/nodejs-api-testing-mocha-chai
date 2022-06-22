@@ -33,12 +33,10 @@ const Authorization = {
     }
     console.log("req.headers: ");
     console.log(req.headers);
+    console.log(token);
     if (token) {
       // decoded.userId = decoded.id;
-      const decodedToken = jwt.decode(token, {
-        complete: true
-      });
-      req.decoded = decodedToken;
+      req.decoded = token;
       next();
       // jwt.verify(token, key, (error, decoded) => {
       //   if (error) {
@@ -73,18 +71,27 @@ const Authorization = {
    * @return {Object} - Object containing message
    */
   isAdmin(req, res, next) {
-    const decodedToken = req.decoded;
-    if (typeof decodedToken.currentUser.isAdmin === 'undefined') {
-      return res.status(403).send({
-        message: 'You do not have permission to perform that operation'
-      });
-    } else if (decodedToken.currentUser.isAdmin) {
+    console.log("isAdmin() req.body.user: ");
+    if(req.body['1[isAdmin]']){
       next();
-    } else {
+    }else{
       return res.status(403).send({
         message: 'You do not have permission to perform that operation'
       });
     }
+
+    // const decodedToken = req.decoded;
+    // if (typeof decodedToken.currentUser.isAdmin === 'undefined') {
+    //   return res.status(403).send({
+    //     message: 'You do not have permission to perform that operation'
+    //   });
+    // } else if (decodedToken.currentUser.isAdmin) {
+    //   next();
+    // } else {
+    //   return res.status(403).send({
+    //     message: 'You do not have permission to perform that operation'
+    //   });
+    // }
   },
 
   /**
