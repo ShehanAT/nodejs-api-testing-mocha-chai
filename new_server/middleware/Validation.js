@@ -4,6 +4,7 @@ const { omit } = pkg;
 import userSeeder from '../../new_server/seeders/userSeeder.js';
 import database from '../models/index.js';
 
+
 const { Book, User } = database;
 
 const {
@@ -168,10 +169,11 @@ const Validation = {
    * @returns {Object} - Object containing error message
    */
   checkBookInput(req, res, next) {
-    console.log("checkBookInput() req.body.bookId:");
-    console.log(req.body['0[bookId]'])
+    // console.log("checkBookInput() req.body.bookId:");
+    // console.log(req.body['0[bookId]'])
     var bookErrors = [];
-    if(!Number.isInteger(req.body['0[bookId]'])){
+    console.log(req.body['0[description]']);
+    if(Number.isNaN(Number(req.body['0[bookId]']))){
       bookErrors.push('Book id must not be empty and must be a number');
     }
     if(req.body['0[name]'] == ""){
@@ -183,11 +185,12 @@ const Validation = {
     if(req.body['0[description]'] == ""){
       bookErrors.push('Book Description must not be empty');
     }
-    if(!Number.isInteger(req.body['0[productionYear]'])){
-      bookErrors.push('Book Description must not be empty');
+    if(Number.isNaN(Number(req.body['0[productionYear]']))){
+      bookErrors.push('Book production year must not be empty');
     }
-
-    if(bookErrors){
+    console.log("bookErrors: ");
+    console.log(bookErrors);
+    if(bookErrors.length > 0){
       return res.status(400).json({
             message: bookErrors
       }); 
@@ -259,30 +262,29 @@ const Validation = {
    * @returns {Object} - Object containing book inout
    */
   sendBookInput(req, res, next) {
-    console.log("sendBookInput(): req");
-    console.log(req.body);
-    Book.findOne({
-      where: {
-        isbn: req.body.isbn
-      }
-    })
-      .then((book) => {
-        if (book) {
-          return res.status(409).send({
-            message: 'Book with that ISBN already exist'
-          });
-        }
-      });
-    req.userInput = {
-      title: req.body.title,
-      isbn: req.body.isbn,
-      productionYear: req.body.productionYear,
-      cover: req.body.cover,
-      author: req.body.author,
-      description: req.body.description,
-      categoryId: req.body.categoryId,
-      total: req.body.total
-    };
+      
+    // Book.findOne({
+    //   where: {
+    //     isbn: req.body.isbn
+    //   }
+    // })
+    //   .then((book) => {
+    //     if (book) {
+    //       return res.status(409).send({
+    //         message: 'Book with that ISBN already exist'
+    //       });
+    //     }
+    //   });
+    // req.userInput = {
+    //   title: req.body.title,
+    //   isbn: req.body.isbn,
+    //   productionYear: req.body.productionYear,
+    //   cover: req.body.cover,
+    //   author: req.body.author,
+    //   description: req.body.description,
+    //   categoryId: req.body.categoryId,
+    //   total: req.body.total
+    // };
     next();
   },
 

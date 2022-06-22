@@ -9,7 +9,7 @@ import app from '../../new_server/server.js';
 import models from '../../new_server/models/index.js';
 import userSeeder from '../../new_server/seeders/userSeeder.js';
 import bookSeeder from '../../new_server/seeders/bookSeeder.js';
-
+import chai from 'chai';
 
 const key = process.env.SECRETKEY;
 
@@ -86,11 +86,20 @@ describe('Book Api: ', async () => {
           .set('x-access-token', 'Bearer ' + xAccessToken)
           .send([ addBook, adminUser ])
           .type('form')
-          .expect(200)
+          .expect(201)
           .end((err, res) => {
             if(err){
               console.log(err);
             }
+            var expect = chai.expect;
+            expect(res.body.book.bookId).to.not.be.null;
+            expect(res.body.book.name).to.not.be.null;
+            expect(res.body.book.isbn).to.not.be.null;
+            expect(res.body.book.description).to.not.be.null;
+            expect(res.body.book.productionYear).to.not.be.null;
+            expect(res.body.book.categoryId).to.not.be.null;
+            expect(res.body.book.author).to.not.be.null;
+            expect(res.body.book.total).to.not.be.null;
             // console.log(res);
             // res.status.should.equal(200);
             // res.body.message.length.should.equal(3);

@@ -1,6 +1,7 @@
 import database from '../models/index.js';
 import UserController from './UserController.js';
 import bookSeeder from '../../new_server/seeders/bookSeeder.js';
+import fs from 'fs';
 
 const { checkValidUser } = UserController;
 
@@ -28,14 +29,42 @@ const BookController = {
    *
    */
   create(req, res) {
-    return Book.create(req.userInput)
-      .then((book) => {
-        return res.status(201).send({
-          message: 'Book uploaded successfully',
-          book
-        });
-      })
-      .catch(error => res.status(500).send(error));
+    console.log("create(): req:");
+    console.log(req.body);
+
+    const newBook = {
+      bookId: req.body['0[bookId]'],
+      name: req.body['0[name]'],
+      isbn: req.body['0[isbn]'],
+      description: req.body['0[description]'],
+      productionYear: req.body['0[productionYear]'],
+      categoryId: req.body['0[categoryId]'],
+      author: req.body['0[author]'],
+    }
+    try{
+      fs.writeFile('./savedBook.txt', JSON.stringify(newBook), err => {
+        if(err){
+          console.error(err);
+          return 
+        }
+      });
+    }catch(err){
+      console.log(err);
+    }
+ 
+
+    return res.status(201).send({
+      message: 'Book saved successfully',
+      book: newBook
+    });
+    // return Book.create(req.userInput)
+    //   .then((book) => {
+    //     return res.status(201).send({
+    //       message: 'Book uploaded successfully',
+    //       book
+    //     });
+    //   })
+    //   .catch(error => res.status(500).send(error));
   },
 
   /**

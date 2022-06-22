@@ -167,7 +167,7 @@ const bookRouter = express.Router();
  *         description: Internal server error
  */
 bookRouter.route('/books')
-  .post(isLoggedIn, isAdmin, checkBookInput, sendBookInput, create)
+  .post(isLoggedIn, isAdmin, checkBookInput, create)
   .get(isLoggedIn, getBooks);
 
 
