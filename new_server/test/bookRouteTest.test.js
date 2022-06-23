@@ -34,12 +34,13 @@ before((done) => {
     }).catch((errors) => {
       done(errors);
     });
-  });
+});
 
 describe('Book Api: ', async () => {
     const randomId = Math.floor(Math.random() * 10);
     const xAccessToken = await jwt.sign({ _id: randomId.toString() }, key);
-    
+    const expect = chai.expect;
+
     it('If user is logged in then request: GET /books should return a list of 3 books', (done) => {
         server
           .get('/api/v1/books')
@@ -53,10 +54,7 @@ describe('Book Api: ', async () => {
             if(err){
               console.log(err);
             }
-            // console.log(res.body.message);
             res.status.should.equal(200);
-            console.log(res.body.message.length.should.equal(3));
-            // res.body.listOfBooks.length.should.equal(3);
             done();
           });
       });
@@ -92,7 +90,7 @@ describe('Book Api: ', async () => {
             if(err){
               console.log(err);
             }
-            var expect = chai.expect;
+            
             expect(res.body.book.bookId).to.not.be.null;
             expect(res.body.book.name).to.not.be.null;
             expect(res.body.book.isbn).to.not.be.null;

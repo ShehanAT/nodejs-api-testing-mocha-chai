@@ -34,9 +34,9 @@ const Authorization = {
     } else {
       token = tokenAvailable;
     }
-    console.log("req.headers: ");
-    console.log(req.headers);
-    console.log(token);
+    // console.log("req.headers: ");
+    // console.log(req.headers);
+    // console.log(token);
     if (token) {
       // decoded.userId = decoded.id;
       req.decoded = token;
@@ -74,7 +74,6 @@ const Authorization = {
    * @return {Object} - Object containing message
    */
   isAdmin(req, res, next) {
-    console.log("isAdmin() req.body.user: ");
     if(req.body['1[isAdmin]']){
       next();
     }else{

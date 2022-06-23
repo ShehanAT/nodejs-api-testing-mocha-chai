@@ -186,10 +186,7 @@ const Validation = {
    * @returns {Object} - Object containing error message
    */
   checkBookInput(req, res, next) {
-    // console.log("checkBookInput() req.body.bookId:");
-    // console.log(req.body['0[bookId]'])
     var bookErrors = [];
-    console.log(req.body['0[description]']);
     if(Number.isNaN(Number(req.body['0[bookId]']))){
       bookErrors.push('Book id must not be empty and must be a number');
     }
@@ -205,8 +202,6 @@ const Validation = {
     if(Number.isNaN(Number(req.body['0[productionYear]']))){
       bookErrors.push('Book production year must not be empty');
     }
-    console.log("bookErrors: ");
-    console.log(bookErrors);
     if(bookErrors.length > 0){
       return res.status(400).json({
             message: bookErrors
@@ -355,8 +350,6 @@ const Validation = {
   checkUserExist(req, res, next) {
     Validation.checkValidDetails(req.body.email, req.body.username, res);
     const username = req.body.username;
-    console.log("username: " + username);
-    console.log("existing username: " + existingUsername.username);
     if(username !== existingUsername.username){
       return res.status(200).send({
         userExist: false,

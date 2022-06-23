@@ -1,4 +1,16 @@
 const bookSeeder = {
+  listOfBookCategories: {
+    categories: [
+      'Fantasy',
+      'Sci-Fi',
+      'Mystery',
+      'Thriller',
+      'Romance',
+      'Western',
+      'Dystopian',
+      'Contemporary'
+    ]
+  },
   addBook: {
     bookId: 4,
     name: "Seeking Wisdom: From Darwin to Munger",

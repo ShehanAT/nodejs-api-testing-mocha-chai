@@ -2,10 +2,10 @@ import express from 'express';
 import Authorization from '../middleware/Authorization.js';
 import BookController from '../controllers/BookController.js';
 
-
 const { isLoggedIn } = Authorization;
 
 const { getCategory } = BookController;
+
 
 const categoryRouter = express.Router();
 

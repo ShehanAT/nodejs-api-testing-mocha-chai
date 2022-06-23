@@ -1,8 +1,10 @@
 import database from '../models/index.js';
 import UserController from './UserController.js';
-import bookSeeder from '../../new_server/seeders/bookSeeder.js';
 import fs from 'fs';
+import bookSeeder from '../seeders/bookSeeder.js';
 
+
+const { listOfBookCategories } = bookSeeder;
 const { checkValidUser } = UserController;
 
 const {
@@ -29,8 +31,6 @@ const BookController = {
    *
    */
   create(req, res) {
-    console.log("create(): req:");
-    console.log(req.body);
 
     const newBook = {
       bookId: req.body['0[bookId]'],
@@ -438,11 +438,13 @@ const BookController = {
    *
    */
   getCategory(req, res) {
-    return Category.findAll({})
-      .then((category) => {
-        res.status(200).send(category);
-      })
-      .catch(error => res.status(500).send(error));
+    if(listOfBookCategories.categories.length > 0){
+      res.status(200).send({
+        categories: listOfBookCategories.categories
+      });
+    }else{
+      res.status(500).send(err);
+    }
   },
 
   /**
