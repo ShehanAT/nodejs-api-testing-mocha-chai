@@ -99,62 +99,32 @@ const BookController = {
    * ROUTE: POST: /users/:userId/books
    */
   rentBook(req, res) {
-    const { userId, id, username } = req.decoded.currentUser;
+    const userId = req.body['1[userId]'];
+    const username = req.body['1[username]'];
+    // const { userId, id, username } = req.decoded.currentUser;
 
     const userData = {
       userId,
-      newId: req.params.userId
+      newId: req.body['1[userId]']
     };
 
     checkValidUser(res, userData);
 
-    const currentDate = new Date();
-    const after20days = currentDate.setDate(currentDate.getDate() + 20);
-    return Book.findById(req.body.bookId)
-      .then((book) => {
-        if (book) {
-          if (book.total === 0) {
-            return res.status(200).send({
-              message: 'This book is not available for rent',
-              status: false
-            });
-          }
+    // const currentDate = new Date();
+    // const after20days = currentDate.setDate(currentDate.getDate() + 20);
 
-          return RentedBook.create({
-            bookId: req.body.bookId,
-            description: book.description,
-            title: book.title,
-            userId,
-            cover: book.cover,
-            toReturnDate: after20days
-          })
-            .then(() => Book.update(
-              {
-                total: book.total - 1
-              },
-              {
-                where: {
-                  id: req.body.bookId
-                }
-              }
-            ))
-            .then(() => {
-              BookController
-                .createNotification(id, username, book.title, 'rented');
-              return res.status(201).send({
-                message: 'You have successfully rented the book',
-                status: true,
-                rentedBook: book
-              });
-            });
-        }
-        return res.status(404).send({
-          message: 'Book not found'
-        });
-      })
-      .catch((error) => {
-        return res.status(500).send(error);
-      });
+    var newlyRentedBook = {
+      bookId: req.body['0[bookId]'],
+      userId: req.body['1[userId]'],
+      returned: false,
+    };
+
+    rentedBooks.push(newlyRentedBook);
+
+    res.status(200).send({
+      message: 'Book rented by user successfully',
+      rentedBook: newlyRentedBook,
+    });
   },
 
   /**

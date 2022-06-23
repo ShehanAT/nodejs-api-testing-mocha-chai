@@ -20,7 +20,8 @@ const {
 } = bookSeeder;
 
 const {
-  adminUser
+  adminUser,
+  nonAdminUser
 } = userSeeder;
 
 const server = supertest.agent(app);
@@ -78,7 +79,7 @@ describe('Book Api: ', async () => {
           });
       });
 
-      it('If user is logged in then request: POST /books should create a new book and return it', (done) => {
+      it('Should allow the user to create a new book and return it if the user is logged, via the request: POST /books', (done) => {
         server
           .post('/api/v1/books')
           .set('Connection', 'keep alive')
@@ -106,28 +107,24 @@ describe('Book Api: ', async () => {
       });
 
 
-      it('should allow the user to borrow a book if the user is logged in via the request: POST /users/{userId}/books', (done) => {
+      it('Should allow the user to borrow a book if the user is logged in, via the request: POST /users/{userId}/books', (done) => {
         server
-          .post('/api/v1/users/{userId}/books')
+          .post('/api/v1/users/4/books')
           .set('Connection', 'keep alive')
           .set('Content-Type', 'application/json')
           .set('x-access-token', 'Bearer ' + xAccessToken)
-          .send([ addBook, adminUser ])
+          .send([ addBook, nonAdminUser ])
           .type('form')
-          .expect(201)
+          .expect(200)
           .end((err, res) => {
             if(err){
               console.log(err);
             }
             var expect = chai.expect;
-            // expect(res.body.book.bookId).to.not.be.null;
-            // expect(res.body.book.name).to.not.be.null;
-            // expect(res.body.book.isbn).to.not.be.null;
-            // expect(res.body.book.description).to.not.be.null;
-            // expect(res.body.book.productionYear).to.not.be.null;
-            // expect(res.body.book.categoryId).to.not.be.null;
-            // expect(res.body.book.author).to.not.be.null;
-            // expect(res.body.book.total).to.not.be.null;
+
+            expect(res.body.rentedBook.bookId).to.not.be.null;
+            expect(res.body.rentedBook.userId).to.not.be.null;
+            expect(res.body.rentedBook.returned).to.be.false;
 
             done();
           });

@@ -8,6 +8,15 @@ const userSeeder = {
     isAdmin: true,
     passwordConfirm: '123456'
   },
+  nonAdminUser: {
+    userId: 4, 
+    fullName: 'Epitetus',
+    username: 'epitetus123',
+    password: 'abcdef',
+    email: 'epitetus@gmail.com',
+    isAdmin: false,
+    passwordConfirm: 'abcdef'
+  },
   signUp: {
     fullName: 'Zeno of Citium',
     username: 'zeno123',

@@ -1,12 +1,15 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import database from '../models/index.js';
+import bookSeeder from '../seeders/bookSeeder.js'
+
 
 dotenv.config();
 
 const key = process.env.SECRETKEY;
 const { User } = database;
 const { RentedBook } = database;
+const { rentedBooks } = bookSeeder;
 
 const Authorization = {
 
@@ -106,21 +109,34 @@ const Authorization = {
    * @return {Object} - Object containing message
    */
   hasRentedBefore(req, res, next) {
-    RentedBook.findOne({
-      where: {
-        bookId: req.body.bookId,
-        userId: req.params.userId,
-        returned: false
+    var hasRentedBefore = false;
+    for(var i = 0; i < rentedBooks.length; i++){
+      if(rentedBooks[i].userId === req.body['1[userId]'] && rentedBooks[i].bookId === req.body['0[bookId]'] && !rentedBooks[i].returned){
+        hasRentedBefore = true;
       }
-    }).then((books) => {
-      if (books) {
-        res.status(409).send({
-          message: 'You have rented that book before'
-        });
-      } else {
-        next();
-      }
-    });
+    }
+    if(hasRentedBefore){
+      res.status(409).send({
+        message: 'You already have that book checked out'
+      });
+    }else{
+      next();
+    }
+    // RentedBook.findOne({
+    //   where: {
+    //     bookId: req.body.bookId,
+    //     userId: req.params.userId,
+    //     returned: false
+    //   }
+    // }).then((books) => {
+    //   if (books) {
+    //     res.status(409).send({
+    //       message: 'You have rented that book before'
+    //     });
+    //   } else {
+    //     next();
+    //   }
+    // });
   },
 
   /**
