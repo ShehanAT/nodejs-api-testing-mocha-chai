@@ -35,17 +35,17 @@ before((done) => {
 describe('User Api: ', () => {
   it('should return valid HTML and 200 Response Code', (done) => {
     server
-      .get('/api/v1/users/signup')
+      .post('/api/v1/users/signup')
       .set('Connection', 'keep alive')
       .set('Content-Type', 'application/json')
       .type('form')
       .send(validRegisterDetails)
-      .expect(200)
+      .expect(201)
       .end((err, res) => {
         if(err){
           console.log(err);
         }
-        res.status.should.equal(200);
+        res.status.should.equal(201);
         done();
       });
   });
