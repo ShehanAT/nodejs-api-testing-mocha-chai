@@ -1,0 +1,63 @@
+{
+    "name": "react-api-testing-server",
+    "version": "1.0.0",
+    "description": "Node.js server app for testing APIs in React",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "start": "nodemon --watch server --exec babel-node server.js",
+        "webpack": "webpack-dev-server --progress --colors --hot --config ./webpack.config.dev.js",
+        "test": "NODE_ENV=test && mocha --timeout 40000 --require @babel/register",
+        "tests": "NODE_ENV=test mocha --timeout 1000000 --compilers js:babel-core/register test ",
+        "coveralls": "NODE_ENV=test nyc report --reporter=text-lcov | coveralls",
+        "client:test": "jest --coverage cli",
+        "test:watch": "npm run client:test -- --watch",
+        "build": "webpack --progress --config ./webpack.config.prod.js",
+        "heroku-postbuild": "NODE_ENV=production && npm run build",
+        "migrate:undo": "sequelize db:seed:undo",
+        "db:seed": "DATABASE_URL=$DATABASE_URL sequelize db:seed --seed server/seeders/20171016124637-users.js",
+        "coverage": "NODE_ENV=test &&./node_modules/.bin/nyc --reporter=lcov mocha --reporter spec --timeout 40000 --compilers js:babel-core/register test"
+    },
+    "engines": {
+        "node": "6.11.0"
+    },
+    "repository": "",
+    "author": "Originally Authored by Muhammad Bilal Sadiq",
+    "license": "MIT",
+    "bugs": {
+        "url": ""
+    },
+    "jest": {
+        "setupFiles": [
+            "<rootDir>/test-env.js"
+        ]
+    },
+    "homepage": "",
+    "dependencies": {
+        "@types/lodash.omit": "^4.5.7",
+        "bcrypt": "^5.0.1",
+        "body-parser": "^1.20.0",
+        "chai": "^4.3.6",
+        "clean-webpack-plugin": "^4.0.0",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "express-validator": "^5.3.1",
+        "html-webpack-plugin": "^5.5.0",
+        "jsonwebtoken": "^8.5.1",
+        "logger": "^0.0.1",
+        "morgan": "^1.10.0",
+        "nodemailer": "^6.7.5",
+        "path": "^0.12.7",
+        "pg": "^8.7.3",
+        "sequelize": "^6.20.1",
+        "swagger-jsdoc": "^6.2.1",
+        "webpack": "^5.73.0",
+        "webpack-dev-middleware": "^5.3.3",
+        "webpack-dev-server": "^4.9.2",
+        "webpack-node-externals": "^3.0.0",
+        "winston": "^3.7.2"
+    },
+    "devDependencies": {
+        "@babel/node": "^7.18.5"
+    }
+}
