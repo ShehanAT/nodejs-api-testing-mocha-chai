@@ -75,7 +75,7 @@ const userSeeder = {
     password: '123456',
     passwordConfirm: '123456'
   },
-  validRegisterDetails: {
+  validRegisterDetails: { 
     fullName: 'Cleanthes Stoic',
     username: 'testuser1',
     password: 'password1',

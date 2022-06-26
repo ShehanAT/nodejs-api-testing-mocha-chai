@@ -42,7 +42,7 @@ describe('Book Categories Api: ', async () => {
     const xAccessToken = await jwt.sign({ _id: randomId.toString() }, key);
     const expect = chai.expect;
 
-    it('If user is logged in then request: GET /books should return a list of 3 books', (done) => {
+    it('If user is logged in then request: GET /category should return a list of 3 books', (done) => {
         server
           .get('/api/v1/category')
           .set('Connection', 'keep alive')
